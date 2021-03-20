@@ -1,0 +1,38 @@
+import router from '@/router'
+import store from '@/store'
+import nprogress from 'nprogress'
+import 'nprogress/nprogress.css'
+
+const whiteList = ['/login', '/404'] // 定义白名单  所有不受权限控制的页面
+// 前置守卫，必须执行 next
+// next 放过
+// next(false) 终止
+// next(地址) 跳转到某个地址
+router.beforeEach((to, from, next) => {
+  // 开启进度条
+  nprogress.start()
+  if (store.getters.token) {
+    // 有 token
+    if (to.path === '/login') {
+      // 如果要访问的是登录页，跳转到主页
+      next('/') // 跳到主页
+    } else {
+      next() // 直接放行
+    }
+  } else {
+    // 无 token
+    if (whiteList.includes(to.path)) {
+      // 在白名单里，放行
+      next()
+    } else {
+      // 不在，跳转到登录
+      next('/login')
+    }
+  }
+  // 为了解决手动切换地址时进度条的不关闭的问题，例如 /dashboard 再手动输入 /login
+  NProgress.done() // 手动强制关闭一次  为了解决 手动切换地址时  进度条的不关闭的问题
+})
+// 后置守卫
+router.afterEach(function () {
+  NProgress.done() // 关闭进度条
+})
