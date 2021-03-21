@@ -26,7 +26,9 @@ export default {
   data() {
     return {
       company: {}, // 头部的数据结构
-      departs: [],
+      departs: [{ name: '总裁办', manager: '曹操', children: [{ name: '董事会', manager: '曹丕' }] },
+        { name: '行政部', manager: '刘备' },
+        { name: '人事部', manager: '孙权' }],
       defaultProps: {
         label: 'name' // 表示 从这个属性显示内容
       }
@@ -38,8 +40,7 @@ export default {
   methods: {
     async  getDepartments() {
       const result = await getDepartments()
-      this.company = { name: result.companyName, manager: '负责任' }
-      this.departs = result.depts
+      this.company = { name: result.companyName }
       console.log(result)
     }
   }
