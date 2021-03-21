@@ -1,5 +1,5 @@
 
-import { getToken, setToken, removeToken, setTimeStamp } from '@/utils/auth'
+import { getToken, setToken, removeToken setTimeStamp } from '@/utils/auth'
 import { login, getUserInfo, getUserDetailById } from '@/api/user'
 
 // 状态
@@ -33,7 +33,7 @@ const actions = {
     const result = await login(data) // 拿到 token
     // axios 默认加了一层data
     context.commit('setToken', result) // 设置 koken
-    setTimeStamp() // 设置当前的时间戳
+    setTimeStamp
   },
   // 获取用户资料action
   async getUserInfo(context) {
