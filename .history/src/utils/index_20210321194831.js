@@ -119,18 +119,11 @@ export function param2Obj(url) {
 // 将列表形的数据 转换成 树形数据  => 递归算法 => 自身调用自身 => 一定条件不能一样 ,否则会死循环
 
 export function tranListToTreeData(list, rootValue) {
-  debugger
   var arr = []
   list.forEach(item => {
     if (item.pid === rootValue) {
       // 找到后 就去  找 item  下面有没有子节点
       const children = tranListToTreeData(list, item.id)
-      if (children.length) {
-        // 如果 children 长度大于0 说明 找到了子节点
-        item.children = children
-      }
-      arr.push(item) // 将内容加到数组
     }
   })
-  return arr
 }

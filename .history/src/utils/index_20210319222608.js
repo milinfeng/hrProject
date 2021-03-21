@@ -45,7 +45,7 @@ export function parseTime(time, cFormat) {
   const time_str = format.replace(/{([ymdhisa])+}/g, (result, key) => {
     const value = formatObj[key]
     // Note: getDay() returns 0 on Sunday
-    if (key === 'a') { return ['日', '一', '二', '三', '四', '五', '六'][value] }
+    if (key === 'a') { return ['日', '一', '二', '三', '四', '五', '六'][value ] }
     return value.toString().padStart(2, '0')
   })
   return time_str
@@ -114,23 +114,4 @@ export function param2Obj(url) {
     }
   })
   return obj
-}
-
-// 将列表形的数据 转换成 树形数据  => 递归算法 => 自身调用自身 => 一定条件不能一样 ,否则会死循环
-
-export function tranListToTreeData(list, rootValue) {
-  debugger
-  var arr = []
-  list.forEach(item => {
-    if (item.pid === rootValue) {
-      // 找到后 就去  找 item  下面有没有子节点
-      const children = tranListToTreeData(list, item.id)
-      if (children.length) {
-        // 如果 children 长度大于0 说明 找到了子节点
-        item.children = children
-      }
-      arr.push(item) // 将内容加到数组
-    }
-  })
-  return arr
 }

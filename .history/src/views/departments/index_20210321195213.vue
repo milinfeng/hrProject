@@ -39,7 +39,7 @@ export default {
     async  getDepartments() {
       const result = await getDepartments()
       this.company = { name: result.companyName, manager: '负责任' }
-      this.departs = tranListToTreeData(result.depts, '')
+      this.departs = result.depts
       console.log(result)
     }
   }

@@ -119,7 +119,6 @@ export function param2Obj(url) {
 // 将列表形的数据 转换成 树形数据  => 递归算法 => 自身调用自身 => 一定条件不能一样 ,否则会死循环
 
 export function tranListToTreeData(list, rootValue) {
-  debugger
   var arr = []
   list.forEach(item => {
     if (item.pid === rootValue) {
