@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard-container">
     <div class="dashboard-text">name: {{ name }}</div>
-    <image-upload />
+    <ImageUpload />
     <page-tools :show-before="true" />
 
   </div>
